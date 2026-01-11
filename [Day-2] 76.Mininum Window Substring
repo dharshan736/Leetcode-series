@@ -1,0 +1,37 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        counter=defaultdict(int)
+        for i in t:
+            counter[i]+=1
+        minlen=len(s)+1
+        start=-1
+        end=-1
+        l=0
+        r=0
+        valid=0
+        while r<len(s):
+            #print(counter)
+            if s[r] in counter:
+                counter[s[r]]-=1
+                print(len(counter))
+                if counter[s[r]]==0:
+                    valid+=1
+                if valid==len(counter):
+                    #print(counter)
+                    while valid==len(counter):
+                        if s[l] in counter:
+                            counter[s[l]]+=1
+                            #print(counter)
+                            if counter[s[l]]>0:
+                                if r-l+1<minlen:
+                                    minlen=min(minlen,r-l+1)
+                                    start=l
+                                    end=r
+                                valid-=1
+                        l+=1
+            r+=1
+        if start==len(s)+1:
+            return ""
+        return s[start:end+1]
+
+        
