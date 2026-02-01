@@ -1,0 +1,15 @@
+class Solution(object):
+    def plusOne(self, digits):
+        i=len(digits)-1
+        carr=1
+        while i>=0:
+            val=digits[i]+carr
+            digits[i]=(val)%10
+            carr=val//10
+            #print(carr)
+            i-=1
+        if carr:
+            digits.insert(0,carr)
+        return digits
+
+        
