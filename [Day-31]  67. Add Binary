@@ -1,0 +1,16 @@
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        s1=len(a)-1
+        s2=len(b)-1
+        carry=0
+        res=[]
+        while s1>=0 or s2>=0 or carry:
+            x=int(a[s1]) if s1>=0 else 0
+            y=int(b[s2]) if s2>=0 else 0
+            c=x+y+carry
+            res.append(str(c%2))
+            carry=c//2
+            s1-=1
+            s2-=1
+        return ''.join(reversed(res))
+        
