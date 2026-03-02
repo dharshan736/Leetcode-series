@@ -1,0 +1,25 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        m=len(grid)
+        n=len(grid[0])
+        maxlen=0
+        def backtrack(pos):
+            #cur=0
+            i,j=pos
+            grid[i][j]="#"
+            count=1
+            for k in ((1,0),(0,1),(-1,0),(0,-1)):
+                pos_i,pos_j=i+k[0],j+k[1]
+                if 0<=pos_i<m and 0<=pos_j<n:
+                    if grid[pos_i][pos_j]==1:
+                        count+=backtrack((pos_i,pos_j))
+            return count
+
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]==1:
+                    cur=backtrack((i,j))
+                    maxlen=max(cur,maxlen)
+        return maxlen
+        
