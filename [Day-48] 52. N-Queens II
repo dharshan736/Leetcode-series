@@ -1,0 +1,26 @@
+class Solution:
+    def totalNQueens(self, n: int) -> int:
+        board=[["."]*n for _ in range(n)]
+        col=set()
+        posdiagonal=set()
+        negdiagonal=set()
+        self.count=0
+        def backtrack(i):
+            if i==n:
+                self.count+=1
+                return
+            for j in range(n):
+                if j not in col and i-j not in negdiagonal and i+j not in posdiagonal:
+                    col.add(j)
+                    negdiagonal.add(i-j)
+                    posdiagonal.add(i+j)
+                    board[i][j]="Q"
+
+                    backtrack(i+1)
+
+                    board[i][j]="."
+                    col.remove(j)
+                    negdiagonal.remove(i-j)
+                    posdiagonal.remove(i+j)
+        backtrack(0)
+        return self.count
