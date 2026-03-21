@@ -1,0 +1,30 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        check=[]
+        dp=[False]*numCourses
+        graph=defaultdict(list)
+        for i in prerequisites:
+            graph[i[0]].append(i[1])
+        visted=2
+        visting=1
+        unvisted=0
+        seen=[unvisted]*numCourses
+        def dfs(node):
+            state=seen[node]
+            if state==visted:
+                return True
+            if state==visting:
+                return False
+            seen[node]=visting
+            for nei in graph[node]:
+                if not dfs(nei):
+                    return False
+            seen[node]=visted
+            return True
+        for i in range(numCourses):
+            if not dfs(i):
+                return False
+        return True
+            
+
+
