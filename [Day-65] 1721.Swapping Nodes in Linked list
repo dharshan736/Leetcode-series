@@ -1,0 +1,30 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* swapNodes(struct ListNode* head, int k) {
+    struct ListNode *temp,*first,*slow,*fast;
+    int i=1;
+    temp=head;
+    while(i<k){
+        temp=temp->next;
+        i++;
+    }
+    first=temp;
+    slow=head;
+    fast=temp;
+    while(fast!=NULL && fast->next !=NULL){
+        slow=slow->next;
+        fast=fast->next;
+    }
+    printf("%d %d",first->val,slow->val);
+    int j=first->val;
+    first->val=slow->val;
+    slow->val=j;
+    return head;
+
+    
+}
