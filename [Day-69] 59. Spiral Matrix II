@@ -1,0 +1,29 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        res=[[0]*n for i in range(n)]
+        rlow=0
+        rhigh=n-1
+        clow=0
+        chigh=n-1
+        val=1
+        #print(res)
+        while rlow<=rhigh and clow <= chigh:
+            for i in range(clow,chigh+1):
+                res[rlow][i]=val
+                val+=1
+            rlow+=1
+            for i in range(rlow,rhigh+1):
+                res[i][chigh]=val
+                val+=1
+            chigh-=1
+            if rlow>rhigh or clow>chigh:
+                break
+            for i in range(chigh,clow-1,-1):
+                res[rhigh][i]=val
+                val+=1
+            rhigh-=1
+            for i in range(rhigh,rlow-1,-1):
+                res[i][clow]=val
+                val+=1
+            clow+=1
+        return res
