@@ -1,0 +1,23 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        rlow=0
+        rhigh=len(matrix)-1
+        clow=0
+        chigh=len(matrix[0])-1
+        res=[]
+        while rlow<=rhigh and clow<=chigh:
+            for i in range(clow,chigh+1):
+                res.append(matrix[rlow][i])
+            rlow+=1
+            for i in range(rlow,rhigh+1):
+                res.append(matrix[i][chigh])
+            chigh-=1
+            if rlow>rhigh or clow>chigh:
+                break
+            for i in range(chigh,clow-1,-1):
+                res.append(matrix[rhigh][i])
+            rhigh-=1
+            for i in range(rhigh,rlow-1,-1):
+                res.append(matrix[i][clow])
+            clow+=1
+        return res
