@@ -1,0 +1,43 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def spiralMatrix(self, m: int, n: int, head: Optional[ListNode]) -> List[List[int]]:
+        res=[[-1]*n for _ in range(m)]
+        rlow=0
+        rhigh=m-1
+        clow=0
+        chigh=n-1
+        cur=head
+        while rlow<=rhigh and clow<=chigh and cur is not None:
+            i=clow
+            while cur is not None and i<=chigh:
+                res[rlow][i]=cur.val
+                cur=cur.next
+                i+=1
+            rlow+=1
+            i=rlow
+            while cur is not None and i<=rhigh:
+                res[i][chigh]=cur.val
+                cur=cur.next
+                i+=1
+            chigh-=1
+
+            if rlow>rhigh or clow>chigh:
+                break
+            i=chigh
+            while cur is not None and i>=clow:
+                res[rhigh][i]=cur.val
+                cur=cur.next
+                i-=1
+            rhigh-=1
+            i=rhigh
+            while cur is not None and i>=rlow:
+                res[i][clow]=cur.val
+                cur=cur.next
+                i-=1
+            clow+=1
+        return res
+        
