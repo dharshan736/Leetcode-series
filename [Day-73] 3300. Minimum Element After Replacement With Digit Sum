@@ -1,0 +1,14 @@
+class Solution:
+    def minElement(self, nums: List[int]) -> int:
+        m=float("inf")
+        for i in nums:
+            num=0
+            while i>0:
+                num+=i%10
+                i//=10
+            if m>num:
+                m=num
+        return m
+
+
+        
